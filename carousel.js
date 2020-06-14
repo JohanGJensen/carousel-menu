@@ -1,39 +1,5 @@
-// exports.exports = () => {
-//     function test(text) {
-//         console.log(text);
-//     };
-// };
-
-const items = [
-    {
-        title: 'Hello Mother!',
-        paragraph: '',
-        bgColor: 'red',
-    },
-    {
-        title: 'Hello Father!',
-        paragraph: '',
-        bgColor: 'green',
-    },
-    {
-        title: 'Hello Brother!',
-        paragraph: '',
-        bgColor: '#f3a353',
-    },
-    {
-        title: 'Hello Sister!',
-        paragraph: '',
-        bgColor: '#f3f3d3',
-    },
-    {
-        title: 'Hello Friend!',
-        paragraph: '',
-        bgColor: '#f3f3f3',
-    },
-];
-
 // string class names - menu
-const lWrapper = 'carousel-list-wrapper';
+// const lWrapper = 'carousel-list-wrapper';
 const listCls = 'carousel-list';
 // string class names - carousel
 const wrapper = 'carousel-item-wrapper';
@@ -41,15 +7,13 @@ const selected = 'carousel-item-selected';
 const itemCls = 'carousel-item';
 const hovering = 'carousel-item-hover';
 
-// DOM elements
-const ELItemWrapper = document.getElementsByClassName(wrapper);
-const ELItemSelected = document.getElementsByClassName(selected);
-const ELitem = document.getElementsByClassName(itemCls);
-
-const ELlistWrapper = document.getElementsByClassName(lWrapper);
+exports.setListAndItems = (listDest, itemDest, items) => {
+    this.setMenu(listDest, items);
+    this.setItems(itemDest, items);
+};
 
 // sets items into designated element
-function setItems(destEl, items) {
+exports.setItems = (destEl, items) => {
     if (!Array.isArray(items)) return;
 
     // provide unique ID for each item, if none exist
@@ -90,43 +54,8 @@ function setItems(destEl, items) {
     setItemListeners(destEl);
 };
 
-setItems(ELItemWrapper, items);
-// setItems(ELItemWrapper, items);
-
-// sets event listeners on each item in array
-function setItemListeners(destEl) {
-    if (!(destEl instanceof HTMLElement)) return;
-
-    if (destEl.childNodes) destEl = destEl.childNodes;
-
-    if (!(destEl instanceof NodeList)) return console.warn('Warning Element provided does not have a nodelist!');
-
-    destEl.forEach(el => {
-        if (!el.className || el.className.includes(itemCls)) {
-            el.addEventListener('mouseenter', onEnter, false);
-            el.addEventListener('mouseleave', onLeave, false);
-            el.addEventListener('click', onClick, false);
-        }
-    });
-};
-
-// sets event listeners on each item in array
-function setListListeners(destEl) {
-    if (!(destEl instanceof HTMLElement)) return;
-
-    if (destEl.childNodes) destEl = destEl.childNodes;
-
-    if (!(destEl instanceof NodeList)) return console.warn('Warning Element provided does not have a nodelist!');
-
-    destEl.forEach(el => {
-        if (!el.className || el.className.includes(listCls)) {
-            el.addEventListener('click', onClick, false);
-        }
-    });
-};
-
 // sets a designated amount of li elements into a designated element
-function setMenu(destEl, items) {
+exports.setMenu = (destEl, items) => {
     if (!Array.isArray(items)) return;
 
     // provide unique ID for each item, if none exist
@@ -162,21 +91,53 @@ function setMenu(destEl, items) {
     setListListeners(destEl);
 };
 
-setMenu(ELlistWrapper, items);
+// sets event listeners on each item in array
+function setItemListeners(destEl) {
+    if (!(destEl instanceof HTMLElement)) return;
+
+    if (destEl.childNodes) destEl = destEl.childNodes;
+
+    if (!(destEl instanceof NodeList)) return console.warn('Warning Element provided does not have a nodelist!');
+
+    destEl.forEach(el => {
+        if (!el.className || el.className.includes(itemCls)) {
+            el.addEventListener('mouseenter', onEnter, false);
+            el.addEventListener('mouseleave', onLeave, false);
+            el.addEventListener('click', onClick, false);
+        }
+    });
+};
+
+// sets event listeners on each item in array
+function setListListeners(destEl) {
+    if (!(destEl instanceof HTMLElement)) return;
+
+    if (destEl.childNodes) destEl = destEl.childNodes;
+
+    if (!(destEl instanceof NodeList)) return console.warn('Warning Element provided does not have a nodelist!');
+
+    destEl.forEach(el => {
+        if (!el.className || el.className.includes(listCls)) {
+            el.addEventListener('click', onClick, false);
+        }
+    });
+};
 
 function onEnter() {
     // add hovering class - potentially not needed
-    console.log('entering!');
     this.classList.add(hovering);
 };
 
 function onLeave() {
     // remove hovering class - potentially not needed
-    console.log('leaving!');
     this.classList.remove(hovering);
 };
 
 function onClick() {
+    // DOM elements
+    const ELItemWrapper = document.getElementsByClassName(wrapper);
+    const ELItemSelected = document.getElementsByClassName(selected);
+
     if (this.className.includes(listCls)) {
         const carouselChildren = ELItemWrapper[0].childNodes;
         const self = this;
@@ -199,4 +160,4 @@ function onClick() {
 
 function getUID(item) {
     return item.uid = Math.floor(Math.random() * Date.now());
-}
+};
