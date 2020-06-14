@@ -1,0 +1,11 @@
+{
+  "name": "carousel-menu",
+  "version": "1.0.0",
+  "description": "A carousel controlled from a menu of options user defined",
+  "main": "carousel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Johan Glud Jensen",
+  "license": "MIT"
+}
