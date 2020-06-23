@@ -51,8 +51,10 @@ these are going to be populated with list and item elements.
 ## Do note!
 This package is besides generating elements only applying classes to those elements, meaning that the `.css` styling will have to be provided by the user.
 
+
 ## [Items]
 The elements and list will be build from a shared config file such as <items> above.
+
 
 # Methods
 
@@ -64,3 +66,8 @@ The setItems method populates the <div> element with the class `carousel-item-wr
 
 ## setListAndItems(listDestination, itemDestination, items)
 does both `setMenu` and `setItem` at once.
+
+
+## License
+
+MIT © [JohanGJensen](https://github.com/JohanGJensen)

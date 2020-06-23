@@ -40,6 +40,10 @@ exports.setItems = (destEl, items) => {
 
     items.forEach((item, idx) => {
         let el = document.createElement('div');
+        let title;
+        let p;
+        let img;
+        let textNode;
 
         if (!selectedExists && 0 >= idx) el.className += `${selected} `;
 
@@ -47,6 +51,29 @@ exports.setItems = (destEl, items) => {
 
         el.setAttribute('style', `background-color: ${item.bgColor};`);
         el.uid = item.uid;
+
+        if (item.title) {
+            title = document.createElement('h3');
+            textNode = document.createTextNode(item.title);
+            title.appendChild(textNode);
+            el.appendChild(title);
+        }
+
+        if (item.paragraph) {
+            p = document.createElement('p');
+            textNode = document.createTextNode(item.paragraph);
+            p.appendChild(textNode);
+            el.appendChild(p);
+        }
+
+        if (item.image && item.image.src && item.image.alt) {
+            img = document.createElement('img');
+            img.setAttribute('src', item.image.src);
+            img.setAttribute('alt', item.image.alt);
+            if (item.image.width) img.setAttribute('style', `width: ${item.image.width};`);
+            if (item.image.height) img.setAttribute('style', `height: ${item.image.height};`);
+            el.appendChild(img);
+        }
 
         destEl.appendChild(el);
     });
